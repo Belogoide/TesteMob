@@ -1381,17 +1381,22 @@
         const pepDetailsContainer = document.getElementById('pep-details-container');
         const pepRelacionamentoSelect = document.getElementById('pep-relacionamento-select');
         const pepRelacionamentoDetailsContainer = document.getElementById('pep-relacionamento-details-container');
-        const nomePfInput = document.getElementById('nome-pf');
-        const cpfInput = document.getElementById('cpf');
         
         tabs.forEach(tab => {
-            tab.addEventListener('click', () => {
+            tab.addEventListener('click', (e) => {
+                // Remove a classe 'active' de todas as abas e conteúdos
                 tabs.forEach(item => item.classList.remove('active'));
                 tabContents.forEach(item => item.classList.remove('active'));
                 
-                tab.classList.add('active');
-                const target = document.querySelector(tab.dataset.tab-target);
-                target.classList.add('active');
+                // Adiciona a classe 'active' à aba clicada
+                e.target.classList.add('active');
+                
+                // Encontra e exibe o conteúdo da aba correspondente
+                const targetId = e.target.getAttribute('data-tab-target');
+                const targetContent = document.querySelector(targetId);
+                if (targetContent) {
+                    targetContent.classList.add('active');
+                }
             });
         });
 
